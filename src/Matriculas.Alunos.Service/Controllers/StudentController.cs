@@ -7,17 +7,17 @@ namespace Matriculas.Usuarios.Service.Controllers;
 public class StudentController : ControllerBase
 {
 
-    readonly StudentContext StudentContext;
+    readonly StudentContext Context;
 
     public StudentController(StudentContext studentContext)
     {
-        StudentContext = studentContext;
+        Context = studentContext;
     }
 
     [HttpGet(Name = "ListStudents")]
     public IEnumerable<StudentDTO> Get()
     {
-        return StudentContext.Students
+        return Context.Students
             .AsEnumerable()
             .Select(x => x.AsDTO());
     }
@@ -25,9 +25,7 @@ public class StudentController : ControllerBase
     [HttpGet("{id}", Name = "GetStudent")]
     public ActionResult<StudentDTO> GetStudent(int id)
     {
-        var student = from s in StudentContext.Students
-                      where s.Id == id
-                      select s.AsDTO();
+        var student = Context.Students.Find(id);
 
         return (student is not null) ? Ok(student) : new NotFoundResult();
     }
@@ -40,20 +38,21 @@ public class StudentController : ControllerBase
             Name = student.Name
         };
 
-        StudentContext.Students.Add(s);
-        StudentContext.SaveChanges();
+        Context.Students.Add(s);
+        Context.SaveChanges();
 
         return CreatedAtAction(nameof(Create), s);
     }
 
     [HttpPut("{id}", Name = "UpdateStudent")]
-    public IActionResult Put(int id, [FromBody] UpdateStudentDTO student) {
-        var foundStudent = StudentContext.Students.Find(id);
+    public IActionResult Put(int id, [FromBody] StudentDTO student)
+    {
+        var foundStudent = Context.Students.Find(id);
 
-        if(foundStudent is not null) {
-            foundStudent.Name = student.Name;
-            StudentContext.SaveChanges();
-        }
+        if (foundStudent is null) return new NotFoundResult();
+
+        foundStudent.Name = student.Name;
+        Context.SaveChanges();
 
         return Ok(foundStudent);
     }
@@ -61,12 +60,12 @@ public class StudentController : ControllerBase
     [HttpDelete("{id}", Name = "DeleteStudent")]
     public IActionResult Delete(int id)
     {
-        var student = StudentContext.Students.Find(id);
+        var student = Context.Students.Find(id);
 
-        if(student is not null) {
-            StudentContext.Students.Remove(student);
-            StudentContext.SaveChanges();
-        }
+        if (student is null) return new NotFoundResult();
+
+        Context.Students.Remove(student);
+        Context.SaveChanges();
 
         return NoContent();
     }
