@@ -1,3 +1,3 @@
-# Common
+# COMMON
 
-Reusable code between microservices
+Common files for micro-services
