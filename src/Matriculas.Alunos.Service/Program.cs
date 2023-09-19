@@ -1,4 +1,4 @@
-using Configuration.POCO;
+using Matriculas.Common.Database;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
