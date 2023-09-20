@@ -1,0 +1,3 @@
+[submodule "src/Matriculas.Frontend"]
+	path = src/Matriculas.Frontend
+	url = https://github.com/gabrielLV-BR/sistema-de-matriculas-frontend.git
