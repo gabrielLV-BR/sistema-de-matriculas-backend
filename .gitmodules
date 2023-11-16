@@ -1,6 +1,3 @@
-[submodule "src/Matriculas.Frontend"]
-	path = src/Matriculas.Frontend
-	url = https://github.com/gabrielLV-BR/sistema-de-matriculas-frontend.git
-[submodule "src/Matriculas.Gateway/ClientApp"]
-	path = src/Matriculas.Gateway/ClientApp
+[submodule "src/Matriculas.Frontend/ClientApp"]
+	path = src/Matriculas.Frontend/ClientApp
 	url = https://github.com/gabrielLV-BR/sistema-de-matriculas-frontend.git
