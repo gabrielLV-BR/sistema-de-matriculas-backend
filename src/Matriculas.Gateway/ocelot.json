@@ -1,6 +1,6 @@
 {
     "GlobalConfiguration": {
-        "BaseUrl": "http://localhost:5003"
+        "BaseUrl": "http://localhost:4220"
     },
     "Routes": [
         {
@@ -8,13 +8,13 @@
                 "Get",
                 "Post"
             ],
-            "UpstreamPathTemplate": "/estudantes/{everything}",
-            "DownstreamPathTemplate": "/estudantes/{everything}",
+            "UpstreamPathTemplate": "/estudante/listar",
+            "DownstreamPathTemplate": "/estudante/",
             "DownstreamScheme": "http",
             "DownstreamHostAndPorts": [
                 {
                     "Host": "localhost",
-                    "Port": 5221
+                    "Port": 4221
                 }
             ]
         },
@@ -23,13 +23,13 @@
                 "Get",
                 "Post"
             ],
-            "UpstreamPathTemplate": "/escolas/{everything}",
-            "DownstreamPathTemplate": "/escolas/{everything}",
+            "UpstreamPathTemplate": "/escola/{everything}",
+            "DownstreamPathTemplate": "/escola/{everything}",
             "DownstreamScheme": "http",
             "DownstreamHostAndPorts": [
                 {
                     "Host": "localhost",
-                    "Port": 5222
+                    "Port": 4222
                 }
             ]
         }

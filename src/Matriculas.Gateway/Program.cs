@@ -3,31 +3,19 @@ using Ocelot.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddControllersWithViews();
 
-builder.Configuration.AddJsonFile("ocelot.json", optional: false, reloadOnChange: true);
+builder.Configuration.AddJsonFile("ocelot.json",optional:false,reloadOnChange:true);
 builder.Services.AddOcelot(builder.Configuration);
-
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
-{
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-    app.UseHttpsRedirection();
-}
+app.UseHttpsRedirection();
 
-app.UseStaticFiles();
-app.UseRouting();
+app.UseAuthorization();
 
+app.MapControllers();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller}/{action=Index}/{id?}");
-
-app.MapFallbackToFile("index.html");;
+await app.UseOcelot();
 
 app.Run();

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Matriculas.Usuarios.Service.Controllers;
 
 [ApiController]
-[Route("aluno")]
+[Route("estudante")]
 public class StudentController : ControllerBase
 {
 
